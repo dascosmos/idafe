@@ -107,7 +107,7 @@ public class Graficar {
 
             for(int i = 0;i<empresas.size();i++){
                 System.out.println(empresas.get(i));
-            }
+            } 
 
                  /* for(int k = 0; k<preguntas.size();k++){
                     empresas.add(new Empresa(val[0],new Trabajador(i,val[1],val[2],val[3],val[4],val[5],val[6],new Preguntas(k,preguntas.get(k)))));
