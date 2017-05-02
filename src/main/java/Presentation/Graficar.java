@@ -18,6 +18,7 @@ public class Graficar {
             ArrayList<String> info = new ArrayList<String>();
             ArrayList<String> preguntas = new ArrayList<String>();
             StringTokenizer token;
+            StringTokenizer token2;
             leer.LeerFromArchivo();
             String[] val = null;
 
@@ -29,55 +30,88 @@ public class Graficar {
                     //System.out.println( j +"---->"+val[j]);
                     info.add("VISTA HIGHER LEARNING"+val[j]);
                 }
-               /* for(int k = 0; k<preguntas.size();k++){
-                    empresas.add(new Empresa(val[0],new Trabajador(i,val[1],val[2],val[3],val[4],val[5],val[6],new Preguntas(k,preguntas.get(k)))));
-                }*/
-
-                    //System.out.println(val);
-
             }
 
 
             ArrayList<String> pro = new ArrayList<String>();
-            String[] val2;
+            String[] val2 = null;
             String[] val3 = null;
-            String pregunta ="";
             for (int j =0; j<info.size();j++) {
+                int tam = info.get(j).indexOf("Profesional");
                 //System.out.println(j+"--->"+info.get(j));
-                val2 = info.get(j).split(",");
-
-                for (int i =val2.length-1; i>0;i--){
-                    //System.out.println(val2[i]);
-                    if (!val2[i].equals("Profesional")&&!val2[i].equals("Técnico")&&!val2[i].equals("Tecnólogo")&&!val2[i].equals("Maestría")&&!val2[i].equals("Doctorado")&&!val2[i].equals("Bachiller")){
-                        if (val2[i].indexOf("Profesional")>i||val2[i].indexOf("Técnico")>i||val2[i].indexOf("Tecnólogo")>i||val2[i].indexOf("Maestría")>i||val2[i].indexOf("Doctorado")>i||val2[i].indexOf("Bachiller")>i){
-                            pro.add(val2[i]+",");
-                        }
-
-
-                    }else{
-
-                        System.out.println("Nada");
-                        break;
-                    }
-
+                if(info.get(j).contains("Profesional")&&(info.get(j).lastIndexOf("Profesional")>tam||info.get(j).lastIndexOf("Técnico")>tam||info.get(j).lastIndexOf("Tecnólogo")>tam||info.get(j).lastIndexOf("Bachiller")>tam||info.get(j).lastIndexOf("Maestría")>tam||info.get(j).lastIndexOf("Doctorado")>tam||info.get(j).lastIndexOf("Especialización")>tam)) {
+                    val2 = info.get(j).split("Profesional");
+                }else if(info.get(j).contains("Técnico")&&(info.get(j).lastIndexOf("Profesional")>tam||info.get(j).lastIndexOf("Técnico")>tam||info.get(j).lastIndexOf("Tecnólogo")>tam||info.get(j).lastIndexOf("Bachiller")>tam||info.get(j).lastIndexOf("Maestría")>tam||info.get(j).lastIndexOf("Doctorado")>tam||info.get(j).lastIndexOf("Especialización")>tam)) {
+                    val2 = info.get(j).split("Técnico");
+                }else if(info.get(j).contains("Tecnólogo")&&(info.get(j).lastIndexOf("Profesional")>tam||info.get(j).lastIndexOf("Técnico")>tam||info.get(j).lastIndexOf("Tecnólogo")>tam||info.get(j).lastIndexOf("Bachiller")>tam||info.get(j).lastIndexOf("Maestría")>tam||info.get(j).lastIndexOf("Doctorado")>tam||info.get(j).lastIndexOf("Especialización")>tam)) {
+                    val2 = info.get(j).split("Tecnólogo");
+                }else if(info.get(j).contains("Maestría")&&(info.get(j).lastIndexOf("Profesional")>tam||info.get(j).lastIndexOf("Técnico")>tam||info.get(j).lastIndexOf("Tecnólogo")>tam||info.get(j).lastIndexOf("Bachiller")>tam||info.get(j).lastIndexOf("Maestría")>tam||info.get(j).lastIndexOf("Doctorado")>tam||info.get(j).lastIndexOf("Especialización")>tam)) {
+                    val2 = info.get(j).split("Maestría");
+                }else if(info.get(j).contains("Doctorado")&&(info.get(j).lastIndexOf("Profesional")>tam||info.get(j).lastIndexOf("Técnico")>tam||info.get(j).lastIndexOf("Tecnólogo")>tam||info.get(j).lastIndexOf("Bachiller")>tam||info.get(j).lastIndexOf("Maestría")>tam||info.get(j).lastIndexOf("Doctorado")>tam||info.get(j).lastIndexOf("Especialización")>tam)) {
+                    val2 = info.get(j).split("Doctorado");
+                }else if (info.get(j).contains("Bachiller")&&(info.get(j).lastIndexOf("Profesional")>tam||info.get(j).lastIndexOf("Técnico")>tam||info.get(j).lastIndexOf("Tecnólogo")>tam||info.get(j).lastIndexOf("Bachiller")>tam||info.get(j).lastIndexOf("Maestría")>tam||info.get(j).lastIndexOf("Doctorado")>tam||info.get(j).lastIndexOf("Especialización")>tam)) {
+                    val2 = info.get(j).split("Bachiller");
+                }else if(info.get(j).contains("Especialización")&&(info.get(j).lastIndexOf("Profesional")>tam||info.get(j).lastIndexOf("Técnico")>tam||info.get(j).lastIndexOf("Tecnólogo")>tam||info.get(j).lastIndexOf("Bachiller")>tam||info.get(j).lastIndexOf("Maestría")>tam||info.get(j).lastIndexOf("Doctorado")>tam||info.get(j).lastIndexOf("Especialización")>tam)){
+                    val2 = info.get(j).split("Especialización");
+                }else{
+                    val2 = info.get(j).split("",1);
                 }
-
+                //System.out.println(j + "----->" + val2[val2.length-1]);
+                pro.add(val2[val2.length-1]);
             }
 
-
-            int cont = 0;
-            for (int i = cont; i<pro.size();i++){
-                System.out.println(pro.get(i));
-                if(i == cont+28){
-                    preguntas.add(pro.get(i));
+            for (int i = 0; i<pro.size();i++){
+                if(pro.get(i).contains("Profesional")) {
+                   val3=pro.get(i).split("Profesional");
+                }else if(pro.get(i).contains("Técnico")){
+                    val3=pro.get(i).split("Técnico");
+                }else if(pro.get(i).contains("Tecnólogo")){
+                    val3=pro.get(i).split("Tecnólogo");
+                }else if(pro.get(i).contains("Maestría")){
+                    val3=pro.get(i).split("Maestría");
+                }else if(pro.get(i).contains("Doctorado")){
+                    val3=pro.get(i).split("Doctorado");
+                }else if(pro.get(i).contains("Bachiller")){
+                    val3=pro.get(i).split("Bachiller");
+                }else if(pro.get(i).contains("Especialización")){
+                    val3=pro.get(i).split("Especialización");
+                }else{
+                    val3=pro.get(i).split("",1);
                 }
-                cont = i;
-                System.out.println("----->"+cont);
+                preguntas.add(val3[val3.length-1]);
             }
 
-            for(int j = 0; j<preguntas.size();j++){
-                System.out.println(preguntas.get(j));
+            for(int j = 0; j<info.size();j++){
+                int cant = info.get(j).lastIndexOf("Profesional");
+                int cant2 = info.get(j).lastIndexOf("Tecnólogo");
+                int cant3 = info.get(j).lastIndexOf("Técnico");
+                int cant4 = info.get(j).lastIndexOf("Maestría");
+                int cant5 = info.get(j).lastIndexOf("Doctorado");
+                int cant6 = info.get(j).lastIndexOf("Bachiller");
+                int cant7 = info.get(j).lastIndexOf("Especialización");
+
+
+
             }
+
+            for (int i = 1;i<info.size();i++){
+                token = new StringTokenizer(info.get(i), ",");
+                while(token.hasMoreElements()) {
+
+               //     empresas.add(new Empresa(token.nextToken(), new Trabajador(i, token.nextToken(), token.nextToken(), token.nextToken(), token.nextToken(), token.nextToken(), token.nextToken())));
+                }
+                for (int j = 0;j<preguntas.size();j++){
+                    token2 = new StringTokenizer(preguntas.get(j),",");
+                }
+            }
+
+            for(int i = 0;i<empresas.size();i++){
+                System.out.println(empresas.get(i));
+            }
+
+                 /* for(int k = 0; k<preguntas.size();k++){
+                    empresas.add(new Empresa(val[0],new Trabajador(i,val[1],val[2],val[3],val[4],val[5],val[6],new Preguntas(k,preguntas.get(k)))));
+                }*/
 
 
 

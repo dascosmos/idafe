@@ -17,7 +17,7 @@ public class Trabajador {
     private ArrayList<Preguntas> list_Preg = new ArrayList<Preguntas>();
 
 
-    public Trabajador(int id, String cargo, String nivel_C, String genero, String anios_Org, String anios_Carg, String titulos, Preguntas list_Preg) {
+    public Trabajador(int id, String cargo, String nivel_C, String genero, String anios_Org, String anios_Carg, String titulos) {
 
         this.id = id;
         this.cargo = cargo;
@@ -26,7 +26,6 @@ public class Trabajador {
         this.anios_Org = anios_Org;
         this.anios_Carg = anios_Carg;
         this.titulos = titulos;
-        this.list_Preg.add(list_Preg);
     }
 
     public int getId() {
